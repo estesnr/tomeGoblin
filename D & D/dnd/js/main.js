@@ -1,0 +1,187 @@
+//Example fetch using DnD5eAPI - place subclasses in ul
+
+
+document.querySelector('button').addEventListener('click', getFetch)
+
+function clearList(list) {
+  while(list.firstChild) {
+    list.firstChild.remove()
+  }
+}
+
+function getFetch(){
+    // because using hyphens in your entry would be stupid, and this api is stupid, break apart the spaced entry into an array and join it back together with hyphens to work in the api
+  const choice = document.querySelector('#textInput').value
+  let url = ""
+  let choiceInput = choice.split(' ')
+  let choiceJoin = choiceInput.join('-').toLowerCase()
+  let radOpt = document.querySelector("input[name='search']:checked").value;
+  console.log(radOpt)
+  clearList(classList)
+  clearList(subClassList)
+  clearList(descList)
+  clearList(damageList)
+  // decide which section of the api to pull from dependant on radio button selected
+  if(radOpt === 'spellButt') {
+     url = `https://www.dnd5eapi.co/api/spells/${choiceJoin}`
+  }
+  else if(radOpt === 'classButt') {
+    url = `https://www.dnd5eapi.co/api/classes/${choiceJoin}`
+  }
+  else if(radOpt === 'monstButt') {
+    url = `https://www.dnd5eapi.co/api/monsters/${choiceJoin}`
+  }
+  else if(radOpt === "raceButt") {
+    url = `https://www.dnd5eapi.co/api/races/${choiceJoin}`
+  }
+  else if(radOpt === "itemButt") {
+    url = `https://www.dnd5eapi.co/api/equipment/${choiceJoin}`
+  }
+  
+// SPELL SEARCH FUNCTION
+  if(radOpt == "spellButt") {
+  fetch(url)
+      .then(res => res.json()) // parse response as JSON
+      .then(data => {
+       console.log(data)
+       document.querySelector('h2').innerText = data.name
+       document.querySelector('h3').innerText = "Classes"
+       document.querySelector('h4').innerText = "Sub-Classes"
+       document.getElementById('description').innerText = "Description"
+       document.getElementById('damage').innerText = "Range"
+       document.getElementById('damageList').innerText = data.range
+    data.classes.forEach(el => {
+        
+        console.log(el.name)
+        // create an li
+        const li = document.createElement('li')
+        // add text to li
+        li.textContent = el.name
+        // append the li to ul
+        document.querySelector('#classList').appendChild(li)
+    })
+    data.subclasses.forEach(el => {
+          
+           console.log(el.name)
+           // create an li
+           const li = document.createElement('li')
+           // add text to li
+           li.textContent = el.name
+           // append the li to ul
+           document.querySelector('#subClassList').appendChild(li)
+       })
+    data.desc.forEach(el => {
+        console.log(el)
+        // create an li
+        const li = document.createElement('li')
+        // add text to li
+        li.textContent = el
+        // append the li to ul
+        document.querySelector('#descList').appendChild(li)
+    })
+
+                  })
+      .catch(err => {
+          console.log(`error ${err}`)
+      });
+}
+// CLASS SEARCH FUNCTION
+else if(radOpt === "classButt") {
+    fetch(url)
+      .then(res => res.json()) // parse response as JSON
+      .then(data => {
+       console.log(data)
+       document.querySelector('h2').innerText = data.name
+       document.querySelector('h4').innerText = "Starting Equipment"
+       document.querySelector('h3').innerText = "Saving Throws"
+       document.querySelector("#description").innerText = "Proficiencies"
+       document.querySelector('#damage').innerText = "Hit Die"
+       document.querySelector('#damageList').innerText = data.hit_die
+    data.starting_equipment.forEach(el => {
+         console.log(el.equipment.name)
+     // create an li
+        const li = document.createElement('li')
+         // add text to li
+         li.textContent = el.equipment.name
+         // append the li to ul
+         document.querySelector('#subClassList').appendChild(li)
+    })
+    data.saving_throws.forEach(el => {
+        console.log(el.name)
+        const li = document.createElement('li')
+        li.textContent = el.name
+        document.querySelector('#classList').appendChild(li)
+})
+    data.proficiencies.forEach(el => {
+        console.log(el.name)
+        const li = document.createElement('li')
+        li.textContent = el.name
+        document.querySelector("#descList").appendChild(li)
+})
+
+     })
+    }
+
+else if(radOpt === "monstButt") {
+    fetch(url)
+      .then(res => res.json()) // parse response as JSON
+      .then(data => {
+       console.log(data)
+       document.querySelector('h2').innerText = data.name
+       document.querySelector('h3').innerText = "Alignment"
+       document.querySelector('h4').innerText = "Languages"
+       document.querySelector("#damage").innerText = "Hit Points"
+       document.querySelector("#description").innerText = "XP"
+
+       document.querySelector('#classList').innerText = data.alignment
+       document.querySelector('#subClassList').innerText = data.languages
+       document.querySelector('#damageList').innerText = data.hit_points
+       document.querySelector('#descList').innerText = data.xp
+      })
+    }
+else if(radOpt === "raceButt") {
+        fetch(url)
+          .then(res => res.json()) // parse response as JSON
+          .then(data => {
+           console.log(data)
+           document.querySelector('h2').innerText = data.name
+           document.querySelector('h3').innerText = "Alignment"
+           document.querySelector('h4').innerText = "Languages"
+           document.querySelector("#damage").innerText = "Traits"
+           document.querySelector('#description').innerText = "Ability Bonus"
+
+           document.querySelector('#classList').innerText = data.alignment
+           data.languages.forEach(el => {
+            console.log(el.name)
+            const li = document.createElement('li')
+            li.textContent = el.name
+            document.querySelector("#subClassList").appendChild(li)
+    })
+          data.traits.forEach(el => {
+            console.log(el.name)
+            const li = document.createElement('li')
+            li.textContent = el.name
+            document.querySelector('#damageList').appendChild(li)
+          })
+          document.ability_bonuses.ability_score.forEach(el => {
+            console.log(el.name)
+            const li = document.createElement("li")
+            li.textContent = el.name
+            document.querySelector('#descList').appendChild(li)
+          })
+        })
+      }
+        
+else if(radOpt === "itemButt") {
+            fetch(url)
+              .then(res => res.json()) // parse response as JSON
+              .then(data => {
+               console.log(data)
+               document.querySelector('h2').innerText = data.name
+              })
+            }
+else {
+    console.log("oh shit")
+}
+}
+

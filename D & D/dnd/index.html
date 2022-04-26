@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    	<meta charset="utf-8">
+    	<meta name="description" content="This is where your description goes">
+    	<meta name="keywords" content="one, two, three">
+
+		<title>DM Companion</title>
+
+		<!-- external CSS link -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Babylonica&family=Bangers&family=Gloria+Hallelujah&family=Sansita+Swashed:wght@300&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="css/normalize.css">
+		<link rel="stylesheet" href="css/style.css">
+	</head>
+	<header>
+		<img id="logo" src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fdragonfirethegame.com%2Fwp-content%2Fuploads%2F2017%2F04%2Flogo-dnd.png&f=1&nofb=1">
+		<h1>TOME GOBLIN</h1>
+		<h1>Dungeon Master Companion</h1>
+		<img id="TGlogo" src="img/TGLogo.png">
+	</header>
+	<body>
+		<form id="radButts">
+			<input type="radio" id="class" value="classButt" name="search" class="radioButt">
+			<label for="classButt">Class</label>
+			<input type="radio" id="spell" value="spellButt" name="search" class="radioButt">
+			<label for="spellButt">Spell</label>
+			<input type="radio" id="monster" value="monstButt" name="search" class="radioButt">
+			<label for="classButt">Creature</label>
+			<input type="radio" id="race" value="raceButt" name="search" class="radioButt">
+			<label for="raceButt">Race</label>
+			<input type="radio" id="item" value="itemButt" name="search" class="radioButt">
+			<label for="itemButt">Item</label>
+		</form>
+		<input id="textInput" type="text" placeholder="Enter Query" name="" value=""><br />
+		<button type="button" name="button">Dispatch the Tome Goblin</button>
+		<h2 id="entryTitle"></h2>
+		<iframe src="" frameborder="0"></iframe>
+		<h3></h3>
+		<ul id="classList">
+		</ul>
+		<h4></h4>
+		<ul id="subClassList"></ul>
+		<h5 id="damage"></h5>
+		<ul id="damageList"></ul>
+		<h5 id="description"></h5>
+		<ul id="descList"></ul>
+
+		<script type="text/javascript" src="js/main.js"></script>
+	</body>
+</html>

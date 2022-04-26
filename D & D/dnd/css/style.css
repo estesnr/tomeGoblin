@@ -1,0 +1,74 @@
+/******************************************
+/* CSS
+/*******************************************/
+
+/* Box Model Hack */
+*{
+  box-sizing: border-box;
+}
+
+body {
+  background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.dragonsmilk.com%2Fimages%2Fscales.jpg&f=1&nofb=1');
+  background-size: cover;
+  text-align: center;
+  color: lightgrey;
+  font-family: 'Bangers', cursive;
+}
+
+input {
+  height: 60px;
+}
+/******************************************
+/* LAYOUT
+/*******************************************/
+img{
+  display: block;
+  margin: 0 auto;
+}
+
+#TGlogo {
+  height: 240px;
+
+}
+
+button {
+  margin-top: 15px;
+  height: 40px;
+  width: 120px;
+  font-family: 'Gloria Hallelujah', cursive;
+}
+
+li {
+  list-style-type: none;
+  margin: 10px;
+  font-size: 25px;
+}
+
+ul {
+  font-size: 25px;
+}
+
+h1{
+  font-size: 80px;
+}
+
+h2 {
+  font-size: 60px;
+}
+
+h3, h4, h5 {
+  font-size: 40px;
+}
+
+@media screen and (max-width: 700px) {
+    #logo {
+      height: 120px; 
+    }
+
+    * {
+      text-align: center;
+    }
+}
+/******************************************
+/* ADDITIONAL STYLES
+/*******************************************/
