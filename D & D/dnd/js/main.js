@@ -79,6 +79,9 @@ function getFetch(){
         // append the li to ul
         document.querySelector('#descList').appendChild(li)
     })
+    data.damage.forEach(el => {
+      console.log(el.damage_at_slot_level)
+    })
 
                   })
       .catch(err => {
@@ -163,10 +166,10 @@ else if(radOpt === "raceButt") {
             li.textContent = el.name
             document.querySelector('#damageList').appendChild(li)
           })
-          document.ability_bonuses.ability_score.forEach(el => {
-            console.log(el.name)
+          data.ability_bonuses.forEach(el => {
+            console.log(el.ability_score.name)
             const li = document.createElement("li")
-            li.textContent = el.name
+            li.textContent = `${el.ability_score.name} + ${el.bonus}`
             document.querySelector('#descList').appendChild(li)
           })
         })
@@ -178,8 +181,19 @@ else if(radOpt === "itemButt") {
               .then(data => {
                console.log(data)
                document.querySelector('h2').innerText = data.name
+               document.querySelector('h3').innerText = "Category / Range"
+               document.querySelector('h4').innerText = "Item Type"
+               document.querySelector('#damage').innerText = "Stats"
+               document.querySelector('#description').innerText = "Weight / Price"
+
+               data.damage.forEach(el => {
+                 console.log(el.damage_dice)
+                 console.log(el.damage_type.name)
+                //  const li = document.createElement('li')
+                //  li.textContent = el
               })
-            }
+            })
+          }
 else {
     console.log("oh shit")
 }
