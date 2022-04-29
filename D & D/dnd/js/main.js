@@ -1,14 +1,45 @@
 //Example fetch using DnD5eAPI - place subclasses in ul
 
+// variable declarations
+let laugh = new Audio()
+laugh.src = "img/laugh.mp3"
+let imgObj ;
+let animate ;
+window.onload = init;
 
+//Event Listeners
 document.querySelector('button').addEventListener('click', getFetch)
+document.querySelector('button').addEventListener('click', gobLaugh)
+document.querySelector('button').addEventListener('click', gobRun)
+document.querySelector('button').addEventListener('click', init)
 
+// function to play the Goblin Laugh
+function gobLaugh() {
+  laugh.play();
+}
+
+
+// function to make the goblin image run across the screen
+function init() {
+  imgObj = document.querySelector('#TGlogo');
+  imgObj.style.position = "relative";
+  imgObj.style.right = '0px'
+}
+
+function gobRun() {
+  imgObj.style.right = parseInt(imgObj.style.right) + 20 + "px";
+  animate = setTimeout(gobRun, 20);
+  }
+
+
+// function to clear the DOM for the new Entry
 function clearList(list) {
   while(list.firstChild) {
     list.firstChild.remove()
   }
 }
 
+//function to fetch the data from the database and display it on the DOM
 function getFetch(){
     // because using hyphens in your entry would be stupid, and this api is stupid, break apart the spaced entry into an array and join it back together with hyphens to work in the api
   const choice = document.querySelector('#textInput').value
@@ -194,8 +225,9 @@ else if(radOpt === "itemButt") {
               })
             })
           }
-else {
+else if(radOpt === null) {
     console.log("oh shit")
+    document.querySelector('h2').innerText = "Please Select a Category"
 }
 }
 
