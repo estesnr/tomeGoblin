@@ -8,4 +8,8 @@ Primary Upload. Tool is working but needs cleaned up and more information pulled
 
 4/28/2022: <br />
 Added Ability Bonuses to race selection. <br />
-Added Goblin laugh and sprite animation
+Added Goblin laugh and sprite animation <br />
+
+4/30/2022: <br />
+Fixed a bug with the Goblin's Animation <br />
+Completed the Equipment Entries <br />
