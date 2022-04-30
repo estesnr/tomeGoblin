@@ -27,9 +27,15 @@ function init() {
 }
 
 function gobRun() {
-  imgObj.style.right = parseInt(imgObj.style.right) + 20 + "px";
+  imgObj.style.right = parseInt(imgObj.style.right) + 25 + "px";
   animate = setTimeout(gobRun, 20);
-  }
+  setTimeout(gobReturn, 1800)
+}
+
+function gobReturn() {
+  imgObj.style.right = "0px"
+  clearTimeout(animate)
+}
 
 
 // function to clear the DOM for the new Entry
@@ -212,17 +218,58 @@ else if(radOpt === "itemButt") {
               .then(data => {
                console.log(data)
                document.querySelector('h2').innerText = data.name
-               document.querySelector('h3').innerText = "Category / Range"
-               document.querySelector('h4').innerText = "Item Type"
-               document.querySelector('#damage').innerText = "Stats"
-               document.querySelector('#description').innerText = "Weight / Price"
+               document.querySelector('h3').innerText = "Category / Range / Class"
+              //  document.querySelector('h4').innerText = "Item Type"
+              //  document.querySelector('#damage').innerText = "Stats"
+              //  document.querySelector('#description').innerText = "Weight / Price"
 
-               data.damage.forEach(el => {
-                 console.log(el.damage_dice)
-                 console.log(el.damage_type.name)
-                //  const li = document.createElement('li')
-                //  li.textContent = el
-              })
+              // decide whether the equipment is a weapon or armor
+
+              if(data.equipment_category.name == 'Armor') {
+                console.log("armor baby")
+                document.querySelector('h3').innerText = `${data.armor_category} Armor
+                Base Armor: ${data.armor_class.base}
+                Dex Bonus: ${data.armor_class.dex_bonus}
+                Stealth Disadvantage: ${data.stealth_disadvantage}
+                Strength Minimum: ${data.str_minimum}`
+                document.querySelector('#description').innerText = `Weight: ${data.weight} 
+                Cost: ${data.cost.quantity} ${data.cost.unit}`
+              }
+              else if(data.equipment_category.name == 'Weapon') {
+                console.log('deez weps')
+                document.querySelector('h3').innerText = `Category/Range: ${data.category_range}
+                Damage: ${data.damage.damage_dice}
+                Damage Type: ${data.damage.damage_type.name}`
+                
+                document.querySelector('h4').innerText = `Range: ${data.range.normal}`
+                if(data.range.long == undefined) {
+                  console.log('nada bitch')
+                  let div = document.querySelector('#damage')
+                  while(div.firstChild) {
+                    div.removeChild(div.firstChild);
+                  }
+                }
+                else {
+                  document.querySelector('#damage').innerText = `Long Range: ${data.range.long}`
+                }
+                document.querySelector('#description').innerText = `Weight: ${data.weight} 
+                Cost: ${data.cost.quantity} ${data.cost.unit}`
+              }
+              else if(data.equipment_category.name == "Adventuring Gear") {
+                document.querySelector('h3').innerText = `Equipment Category: ${data.equipment_category.name}
+                Gear Category: ${data.gear_category.name}`
+                let div = document.querySelector('#damage')
+                let div2 = document.querySelector('h4')
+                  while(div.firstChild) {
+                    div.removeChild(div.firstChild);
+                  }
+                  while(div2.firstChild) {
+                    div2.removeChild(div2.firstChild);
+                  }
+                document.querySelector('#description').innerText = `Weight: ${data.weight} 
+                Cost: ${data.cost.quantity} ${data.cost.unit}`
+              }
+
             })
           }
 else if(radOpt === null) {

@@ -36,6 +36,11 @@ button {
   height: 40px;
   width: 120px;
   font-family: 'Gloria Hallelujah', cursive;
+  animation: forwards;
+}
+
+button:active {
+  transform: translateY(4px);
 }
 
 li {
